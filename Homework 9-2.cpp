@@ -73,8 +73,9 @@ public:
 		return Fraction(*this);
 	}
 	Fraction operator++(int) {
-		numerator_ += denominator_;
-		return Fraction(*this);
+		Fraction tmp = *this;
+		++(*this);
+		return tmp;		
 	}
 
 	Fraction operator--() {
@@ -82,8 +83,9 @@ public:
 		return Fraction(*this);
 	}
 	Fraction operator--(int) {
-		numerator_ -= denominator_;
-		return Fraction(*this);
+		Fraction tmp = *this;
+		--(*this);
+		return tmp;
 	}
 
 };
@@ -114,19 +116,33 @@ int main()
 	f3 = f1 / f2;
 	line(f1, f2, f3, '/');
 
-	++f1;
-	f1.print();
-	std::cout << std::endl;
-	f2++;
-	f2.print();
-
 	std::cout << std::endl;
 
-	--f1;
+	std::cout << "f1 = ";
 	f1.print();
-	std::cout << std::endl;
-	f2--;
+
+	Fraction f1pp = f1++;
+	Fraction ppf1 = ++f1;
+	
+	std::cout << ", if f1++ = ";
+	f1pp.print();
+	std::cout << ", if ++f1 = ";
+	ppf1.print();
+	
+	std::cout << std::endl << std::endl;
+
+	std::cout << "f2 = ";
 	f2.print();
+
+	Fraction f2mm = f2--;
+	Fraction mmf2 = --f2;	
+
+	std::cout << ", if f2-- = ";
+	f2mm.print();
+	std::cout << ", if --f2 = ";
+	mmf2.print();
+	
+
 
 	return 0;
 }
